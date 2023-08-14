@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생정보</title>
+</head>
+<body>
+    <h1>학생 정보</h1>
+    <select id="size">
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+        <option value="10">10</option>
+    </select>
+    <button onclick="setSize()">사이즈</button>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Image</th>
+            <th>수정</th>
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+    </table>
+    <div id="btns">
+        
+    </div>
+    <script>
+        let page = 1
+        let size = 4
+        const students = {}
+        const state = {students:{}, page:1, size:4}
+
+        const getData = async(page = 0) => {
+            const {students,size} = state
+            if(students[page]){
+                return students[page]
+            }
+            const response = await fetch(`http://192.168.0.184:8080/api/v1/member?page=${page}&size=${size}`)
+            const body = await response.json()
+            students[page]=body
+            return body
+            
+        }
+        const makeButton = (totalPages) =>{
+            const btns = document.getElementById("btns")
+            btns.innerHTML=''
+            for (let i = 0; i < totalPages; i++) {
+                const btn = document.createElement("button") //button 생성
+                btn.innerText = i+1 //버튼 내 숫자 증가
+                btn.addEventListener("click",()=>changePage(i)) //<button onclick="getData(0)">1</button> 이렇게 만들어지는 거나 다름없다
+                btns.appendChild(btn)
+            }
+        }
+        const changePage = async(i) => {
+            const students = await getData(i)
+            makeBody(students.content)
+        }
+
+        const makeBody = (content) => {
+            const body = document.getElementById("body")
+            body.innerHTML=''
+            content.forEach(element => {
+                body.innerHTML += `<tr>
+                                    <td>${element.id}</td>
+                                    <td style = ${localStorage.getItem("name")===element.name?'color:red':null}>${element.name}</td>
+                                    <td>${element.number}</td>
+                                    <td><img src='${element.image}' width='100' loading="lazy"></td> 
+                                    <td><a href ="update.html?id=${element.id}">수정</a></td>
+                                  </tr>`            
+                
+            });  //loading이라는 tag ? 쓰면 스크롤 내리면 로딩이 천천히 되면서 이미지가 계속 보임
+        }
+
+        const init = async() => {
+            // const students = await getData()
+            // makeButton(students.totalPages)
+            // makeBody(students.content)
+
+            const {totalPages,content} = await getData()
+            makeButton(totalPages)
+            makeBody(content)
+        }
+        const setSize = () => {
+           const {value} = document.getElementById("size")
+        //    state = {...state, size:value, students:{}}
+            state.students = {}
+            state.size=value
+        //    size = value
+           init()
+        }
+
+        init()
+    </script>
+</body>
+</html>

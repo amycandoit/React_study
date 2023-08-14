@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" id="uId">
+        <input type="text" id="uPw">
+        <button onclick="loginFunc()">로그인</button>
+    </div>
+
+    <script>
+        const user = {uId: "park", uPw: "1234"}
+        const users = [user,{uId: "lee", uPw: "1234"},{uId: "kim", uPw: "1234"}]
+
+        function loginFunc(){
+            const id = document.getElementById("uId").value
+            const pw = document.getElementById("uPw").value
+            check(id,pw)
+        }
+        
+        const loginFunc2 = () => {
+            const id = document.getElementById("uId").value
+            const pw = document.getElementById("uPw").value
+            check(id,pw)
+        }
+
+
+        function check(id, pw){
+            // for (let i = 0; i < users.length; i++) {
+            //     const user = users[i]
+            //     if(id === user.uId && pw === user.uPw){
+            //         document.getElementById("box").innerHTML = `<p>${id} Hello</p>`+`<button onclick = 'localClear()'>clear</button>`
+            //         localStorage.setItem("uId", id)
+            //         localStorage.setItem("uPw", pw)
+            //         return
+            //     }
+            // }   
+            // for (const user of users) {
+            //     // const user = users[i]
+            //     if(id === user.uId && pw === user.uPw){
+            //         document.getElementById("box").innerHTML = `<p>${id} Hello</p>`+`<button onclick = 'localClear()'>clear</button>`
+            //         localStorage.setItem("uId", id)
+            //         localStorage.setItem("uPw", pw)
+            //         return
+            //     }
+            // }   
+
+            const user = users.find(u =>id === u.uId && pw ===u.uPw)
+                // const user = users[i]
+                if(user){
+                    document.getElementById("box").innerHTML = `<p>${id} Hello</p>`+`<button onclick = 'localClear()'>clear</button>`
+                    localStorage.setItem("uId", id)
+                    localStorage.setItem("uPw", pw)
+                    return
+                }
+            
+        }
+
+        const check2 = () => {for (let i = 0; i < users.length; i++) {
+                const user = users[i]
+                if(id === user.uId && pw === user.uPw){
+                    document.getElementById("box").innerHTML = `<p>${id} Hello</p>`+`<button onclick = 'localClear()'>clear</button>`
+                    localStorage.setItem("uId", id)
+                    localStorage.setItem("uPw", pw)
+                    return
+                }
+            }  }
+
+        function localClear() {
+            localStorage.clear()
+            location.reload() //새로고침 자동으로
+            // location.href = "index2.html" //페이지 넘기는 것
+        }
+
+        const localClear2 = () => {
+            localStorage.clear()
+            location.reload()
+        }
+
+        check(localStorage.getItem("uId"),localStorage.getItem("uPw"))
+
+    </script>
+</body>
+
+</html>

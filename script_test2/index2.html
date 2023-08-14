@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="textList">
+
+    </ul>
+    <input type="text" id="text" onkeydown="addFunc(event)">
+    <!-- <button onclick="addFunc()">add</button> -->
+    <br>
+
+    <label>이름</label>
+    <input type="text" id="name">
+    <label>나이</label>
+    <input type="number" id="age">
+    <button onclick="rowAdd()">추가</button>
+    <button onclick="clearBody()">clear</button>
+    
+    <table id="tb1">
+        <thead>
+            <td>name</td>
+            <td>age</td>
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+    </table>
+    <p id="sid"></p>
+</body>
+<script>
+    document.getElementById("sid").innerText = localStorage.getItem("id")
+
+    function addFunc(event) {
+        console.log(event)
+        const text = document.getElementById("text")    
+        if(text.value !==''){      
+        const li = document.createElement("li")
+        li.innerHTML = text.value
+        document.getElementById('textList').appendChild(li)
+        text.value = ''
+        console.log(li)
+        }
+        // if(event.keycode === 13){      
+        //     const li = document.createElement("li")
+        //     li.innerHTML = text.value
+        //     document.getElementById('textList').appendChild(li)      
+        //     text.value = ''
+        //     console.log(li)
+        // }
+    }
+    const persons = []
+    function rowAdd(){
+
+        const name = document.getElementById("name").value
+        const age = document.getElementById("age").value
+
+        persons.push({name: name, age: Number(age)})
+    
+        const tr = document.createElement("tr")
+        const tdName = document.createElement("td")
+        const tdAge = document.createElement("td")
+        
+        tdName.innerHTML= name
+        tdAge.innerHTML = age
+
+        tr.appendChild(tdName)
+        tr.appendChild(tdAge)
+
+        // if(age % 2 == 0){
+        //     tdName.style.color = "green"
+        //     tdAge.style.color = "green"
+        // }else{
+        //     tdName.style.color = "red"
+        //     tdAge.style.color = "red"
+        // }
+
+        if(persons.length % 2 == 0){
+            tr.style.color = "red"
+        }else{
+            tr.style.color = "green"
+        }
+
+        console.log(tr)
+        document.getElementById("body").appendChild(tr)
+        name.value = ''
+        age.value = ''
+    }
+    function clearBody() {
+        document.getElementById("body").innerHTML = ' '
+    }
+
+    // sessionStorage.setItem("key", "value")
+
+</script>
+</html>

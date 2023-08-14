@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    <script>
+        const check = () =>{
+           const num = document.getElementById("num")
+        //    alert(num)
+           const box = document.getElementById("box")
+           const p = document.createElement("p")
+           p.innerHTML = 
+           console.log(p);
+           box.appendChild(p)
+        }
+        const add = (num) => {
+            const num = document.getElementById("num").value
+            const num2 = document.getElementById("num").value
+            const box = document.getElementById("box")
+            const p = document.createElement("p")
+            const add = num+num2
+            p.innerHTML = add
+            
+            console.log(p);
+            box.appendChild(p)
+        }
+        const sum = (a, b) =>{
+            const a = document.getElementById("num").value
+            const b = document.getElementById("num").value
+            const box = document.getElementById("box")
+            const p = document.createElement("p")
+            p.innerHTML = a + b
+            box.appendChild(p)
+            return a + b
+        }  
+        
+
+    </script>
+</body>
+</html>

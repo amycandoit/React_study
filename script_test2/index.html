@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="hi">안녕하세요</p>
+    <button id="changeBtn" onclick="changeAction()">change</button>
+    <p id="drag">0</p>
+    <p>비밀번호</p>
+    <input type="text" id="pw">
+    <p>비밀번호 확인</p>
+    <input type="text" id="pw1" onfocusout="checkFunc()">
+    <button onclick="checkFunc()">확인</button>
+    <p id="check"></p>
+    <ul id="list">
+
+    </ul>
+</body>
+<script>
+    const list = ["네이버", "카카오", "토스"]
+        for (let i = 0; i < list.length; i++) {
+            const ul = document.getElementById('list')        
+            const li = document.createElement('li')
+            console.log(li);
+            li.innerHTML = list[i]
+            ul.appendChild(li)
+        }
+
+
+// alert("뿅")
+    console.log(document.getElementById("hi").innerText)
+//     document.getElementById("changeBtn").addEventListener('click',function(){
+//     const hi = document.getElementById("hi")
+//     if(hi.innerText === 'hi'){
+//         hi.innerHTML = '안녕하세요'
+//     }else{
+//         hi.innerHTML='hi'
+//     }
+//     })
+function changeAction(){
+    const hi = document.getElementById("hi")
+    if(hi.innerText === 'hi'){
+        hi.innerHTML = '안녕하세요'
+    }else{
+        hi.innerHTML='hi'
+    }      
+}
+console.log(document.getElementById("pw").value)
+document.getElementById("drag").addEventListener('drag',function(){
+    const drag = document.getElementById("drag")
+    drag.innerHTML = Number(drag.innerText)+1 //드래그해서 번호 올리기
+})
+
+    console.log(document.getElementById("pw").value)
+
+    // document.getElementById("checkBtn").addEventListener('click',function(){
+    //     const pw = document.getElementById("pw")
+    //     const pw1 = document.getElementById("pw1")
+    // if(document.getElementById("pw").value === document.getElementById("pw1").value){
+    //     check.innerText = '비밀번호가 맞습니다'
+    // }else{
+    //     check.innerText = '비밀번호가 다릅니다.'
+    // }
+    // })
+
+    function checkFunc(){
+        const pw = document.getElementById("pw")
+        const pw1 = document.getElementById("pw1")
+        if(document.getElementById("pw").value === document.getElementById("pw1").value){
+            document.getElementById("check").innerHTML = '비밀번호가 맞습니다'
+        }else{
+            document.getElementById("check").innerHTML = '비밀번호가 다릅니다.'
+        }
+    }
+    
+    
+</script>
+</html>

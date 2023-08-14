@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="num">
+    <br>
+
+    <button onclick="add()" id="add"> + </button>
+    <button onclick="minus()" id="minus"> - </button>
+    <button onclick="multiplication()" id="multiplication"> * </button>
+    <button onclick="division()" id="division"> / </button>
+    <button onclick="equal()"> 확인 </button>
+    <p id="total"></p>
+    <ul id="log">
+
+    </ul>
+
+    <script>
+        let total =0;
+     document.getElementById("total").innerHTML=`<h3>현재값 : ${total} 입니다</h3>`
+
+     function add(){
+         const v1=document.getElementById("num").value
+         const log = document.getElementById("log");
+         const newLog=document.createElement('li');
+         newLog.innerText=`${total}+${v1} = ${total+Number(v1)}`
+         total= total+Number(v1);
+         document.getElementById("total").innerHTML=`<h3>현재값 : ${total} 입니다</h3>`
+         log.appendChild(newLog);
+     }
+
+     function minus(){
+         const v1=document.getElementById("num").value
+         const log = document.getElementById("log");
+         const newLog=document.createElement('li');
+         newLog.innerText=`${total}-${v1} = ${total-Number(v1)}`
+         total= total+Number(v1);
+         document.getElementById("total").innerHTML=`<h3>현재값 : ${total} 입니다</h3>`
+         log.appendChild(newLog);
+     }
+
+     function multiplication(){
+         const v1=document.getElementById("num").value
+         const log = document.getElementById("log");
+         const newLog=document.createElement('li');
+         newLog.innerText=`${total}*${v1} = ${total*Number(v1)}`
+         total= total+Number(v1);
+         document.getElementById("total").innerHTML=`<h3>현재값 : ${total} 입니다</h3>`
+         log.appendChild(newLog);
+     }
+
+     function division(){
+         const v1=document.getElementById("num").value
+         const log = document.getElementById("log");
+         const newLog=document.createElement('li');
+         newLog.innerText=`${total}/${v1} = ${total/
+            Number(v1)}`
+         total= total+Number(v1);
+         document.getElementById("total").innerHTML=`<h3>현재값 : ${total} 입니다</h3>`
+         log.appendChild(newLog);
+     }
+    </script>
+</body>
+</html>
